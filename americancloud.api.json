@@ -5111,8 +5111,15 @@
                     "data": {
                         "title": "Data",
                         "description": "Data wrapper",
-                        "type": "array",
-                        "items": {}
+                        "type": "object",
+					              "properties": {
+                          "data": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "#/components/schemas/InstanceSchema"
+                            }
+                          }
+                        }
                     }
                 },
                 "type": "object",
@@ -6396,7 +6403,7 @@
                     "id": {
                         "title": "ID",
                         "description": "UUID",
-                        "type": "integer",
+                        "type": "string",
                         "format": "string",
                         "example": "79552b97-a784-4f7f-8154-2049491379c0"
                     },
@@ -6928,8 +6935,8 @@
                     "id": {
                         "title": "ID",
                         "description": "UUID",
-                        "type": "integer",
-                        "format": "string",
+                        "type": "string",
+                        "format": "uuid",
                         "example": "79552b97-a784-4f7f-8154-2049491379c0"
                     },
                     "name": {

@@ -722,7 +722,7 @@ type DeleteInstanceSchema struct {
 	FinishedAt *string `json:"finishedAt,omitempty"`
 
 	// Id UUID
-	Id            *int                    `json:"id,omitempty"`
+	Id            *string                 `json:"id,omitempty"`
 	Name          *string                 `json:"name,omitempty"`
 	Options       *map[string]interface{} `json:"options,omitempty"`
 	Pendingjobs   *string                 `json:"pendingjobs,omitempty"`
@@ -848,7 +848,9 @@ type FirewallResource struct {
 // InstanceResource Instance resource
 type InstanceResource struct {
 	// Data Data wrapper
-	Data *[]interface{} `json:"data,omitempty"`
+	Data *struct {
+		Data *[]InstanceSchema `json:"data,omitempty"`
+	} `json:"data,omitempty"`
 }
 
 // InstanceSchema Create Instance Schema
@@ -864,7 +866,7 @@ type InstanceSchema struct {
 	FinishedAt *string `json:"finishedAt,omitempty"`
 
 	// Id UUID
-	Id            *int                    `json:"id,omitempty"`
+	Id            *openapi_types.UUID     `json:"id,omitempty"`
 	Name          *string                 `json:"name,omitempty"`
 	Options       *map[string]interface{} `json:"options,omitempty"`
 	Pendingjobs   *string                 `json:"pendingjobs,omitempty"`

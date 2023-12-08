@@ -29,6 +29,7 @@ func main() {
 		panic(resp.Status())
 	}
 
+	fmt.Println("Projects:")
 	projects := *resp.JSON200.Data
 	if len(projects) > 0 {
 		fmt.Printf("Id: %v\n", *projects[0].Id)
@@ -36,4 +37,21 @@ func main() {
 		fmt.Printf("Description: %v\n", *projects[0].Description)
 		fmt.Printf("Created At: %v\n", *projects[0].CreatedAt)
 	}
+	fmt.Println("")
+
+	resp2, err := c.InstancesListWithResponse(context.Background(), *projects[0].Name)
+	if err != nil {
+		panic(err)
+	}
+	if !(resp2.StatusCode() >= 200 && resp2.StatusCode() < 300) {
+		panic(resp2.Status())
+	}
+
+	fmt.Println("Instances:")
+	instances := *resp2.JSON200.Data.Data
+	if len(instances) > 0 {
+		// fmt.Printf("Id: %v\n", *instances[0].Id)
+		fmt.Printf("Name: %v\n", *instances[0].Name)
+	}
+	fmt.Println("")
 }

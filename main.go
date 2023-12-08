@@ -10,13 +10,20 @@ import (
 	"github.com/deepmap/oapi-codegen/pkg/securityprovider"
 )
 
+func WithDebug(fn RequestEditorFn) ClientOption {
+	return func(c *Client) error {
+		return nil
+	}
+}
+
 func main() {
 	bearerTokenProvider, bearerTokenProviderErr := securityprovider.NewSecurityProviderBearerToken(os.Getenv("AC_TOKEN"))
 	if bearerTokenProviderErr != nil {
 		panic(bearerTokenProviderErr)
 	}
 
-	c, err := NewClientWithResponses("https://app.americancloud.com/api", WithRequestEditorFn(bearerTokenProvider.Intercept))
+	c, err := NewClientWithResponses("https://app.americancloud.com/api",
+		WithRequestEditorFn(bearerTokenProvider.Intercept))
 	if err != nil {
 		panic(err)
 	}
@@ -31,11 +38,11 @@ func main() {
 
 	fmt.Println("Projects:")
 	projects := *resp.JSON200.Data
-	if len(projects) > 0 {
-		fmt.Printf("Id: %v\n", *projects[0].Id)
-		fmt.Printf("AccountID: %v\n", *projects[0].AccountId)
-		fmt.Printf("Description: %v\n", *projects[0].Description)
-		fmt.Printf("Created At: %v\n", *projects[0].CreatedAt)
+	for _, project := range projects {
+		fmt.Printf("Id: %v\n", *project.Id)
+		fmt.Printf("AccountID: %v\n", *project.AccountId)
+		fmt.Printf("Description: %v\n", *project.Description)
+		fmt.Printf("Created At: %v\n", *project.CreatedAt)
 	}
 	fmt.Println("")
 
@@ -49,9 +56,10 @@ func main() {
 
 	fmt.Println("Instances:")
 	instances := *resp2.JSON200.Data.Data
-	if len(instances) > 0 {
-		// fmt.Printf("Id: %v\n", *instances[0].Id)
-		fmt.Printf("Name: %v\n", *instances[0].Name)
+	for _, instance := range instances {
+		fmt.Printf("Id: %v\n", *instance.Id)
+		fmt.Printf("Name: %v\n", *instance.Name)
+		fmt.Printf("Created At: %#v\n", *instance.CreatedAt)
 	}
 	fmt.Println("")
 }

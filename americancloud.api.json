@@ -5116,7 +5116,7 @@
                           "data": {
                             "type": "array",
                             "items": {
-                              "$ref": "#/components/schemas/InstanceSchema"
+                              "$ref": "#/components/schemas/ListInstanceSchema"
                             }
                           }
                         }
@@ -6926,6 +6926,37 @@
                 "type": "object",
                 "xml": {
                     "name": "Instance Batch"
+                }
+            },
+            "ListInstanceSchema": {
+                "title": "List Instance Schema",
+                "description": "List Instance Schema",
+                "properties": {
+                    "id": {
+                        "title": "ID",
+                        "description": "UUID",
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "79552b97-a784-4f7f-8154-2049491379c0"
+                    },
+                    "name": {
+                        "title": "name",
+                        "description": "",
+                        "type": "string",
+                        "format": "string",
+                        "example": "List Instance"
+                    },
+                    "created_at": {
+                        "title": "created_at",
+                        "description": "Created at",
+                        "type": "string",
+                        "format": "datetime",
+                        "example": "2020-01-27 17:50:45"
+                    },
+                },
+                "type": "object",
+                "xml": {
+                  "name": "List Instance Schema"
                 }
             },
             "InstanceSchema": {

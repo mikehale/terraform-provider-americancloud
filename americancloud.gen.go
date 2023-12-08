@@ -849,7 +849,7 @@ type FirewallResource struct {
 type InstanceResource struct {
 	// Data Data wrapper
 	Data *struct {
-		Data *[]InstanceSchema `json:"data,omitempty"`
+		Data *[]ListInstanceSchema `json:"data,omitempty"`
 	} `json:"data,omitempty"`
 }
 
@@ -907,6 +907,16 @@ type KubernetesBatchSchema struct {
 type KubernetesResource struct {
 	// Data Data wrapper
 	Data *[]interface{} `json:"data,omitempty"`
+}
+
+// ListInstanceSchema List Instance Schema
+type ListInstanceSchema struct {
+	// CreatedAt Created at
+	CreatedAt *string `json:"created_at,omitempty"`
+
+	// Id UUID
+	Id   *openapi_types.UUID `json:"id,omitempty"`
+	Name *string             `json:"name,omitempty"`
 }
 
 // LoadBalancerResource Load Balancer Resource
